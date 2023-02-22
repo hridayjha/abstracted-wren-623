@@ -1,33 +1,54 @@
 package com.customer.Entity;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 
 @Entity
 public class Operator {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer operatorId;
+	@NotBlank(message = "First Name cannot be Blank")
+	@NotEmpty(message = "First Name cannot be Empty")
+	@NotNull(message = "First Name cannot be Null")
 	private String firstName;
+	@NotBlank(message = "Last Name cannot be Blank")
+	@NotEmpty(message = "Last Name cannot be Empty")
+	@NotNull(message = "Last Name cannot be Null")
 	private String lastName;
 	@Email
+	@Column(unique = true)
 	private String email;
+	@Column(unique = true)
 	private String mobile;
 	private String city;
-//	@OneToOne
-//	private Call call;
+	@OneToMany(fetch = FetchType.EAGER,cascade = CascadeType.ALL, mappedBy = "operator")
+	private List<Call> call=new ArrayList<>();
 	@JsonIgnore
 	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@JoinColumn(name="dept_id")
 	private Department department;
+//	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+//	@JoinColumn(name="solution_id")
+//	private Solution solution;
 	public Operator()
 	{
 		

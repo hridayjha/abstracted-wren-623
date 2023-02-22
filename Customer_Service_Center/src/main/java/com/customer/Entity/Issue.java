@@ -4,34 +4,49 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToOne;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 
 @Entity
 public class Issue {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer issueId;
+	@NotBlank(message = "Issue cannot be Blank")
+	@NotEmpty(message = "Issue cannot be Empty")
+	@NotNull(message = "Issue cannot be Null")
 	private String issueType;
+	@Size(min = 10, max = 200, message = "Description size should be between 10 and 200 characters")
 	private String description;
-	private String status;
-//	@OneToOne
-//	private Call call;
+	@Enumerated(EnumType.STRING)
+	private Status status;
+	@OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@JoinColumn(name = "call_id")
+	private Call call;
 	@JsonIgnore
 	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@JoinColumn(name= "solution_id")
 	private Solution solution;
 	@JsonIgnore
 	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@JoinColumn(name= "customer_id")
 	private Customer customer;
 	public Issue()
 	{
 		
 	}
-	public Issue(Integer issueId, String issueType, String description, String status, Call call, Solution solution,
+	public Issue(Integer issueId, String issueType, String description, Status status, Call call, Solution solution,
 			Customer customer) {
 		super();
 		this.issueId = issueId;
@@ -60,13 +75,20 @@ public class Issue {
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	public String getStatus() {
+	
+public Status getStatus() {
 		return status;
 	}
-	public void setStatus(String status) {
+	public void setStatus(Status status) {
 		this.status = status;
 	}
-//	public Call getCall() {
+	public Call getCall() {
+		return call;
+	}
+	public void setCall(Call call) {
+		this.call = call;
+	}
+	//	public Call getCall() {
 //		return call;
 //	}
 //	public void setCall(Call call) {
