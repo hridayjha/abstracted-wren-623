@@ -1,5 +1,7 @@
 package com.customer.Entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -19,8 +21,10 @@ public class Issue {
 	private String status;
 //	@OneToOne
 //	private Call call;
+	@JsonIgnore
 	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	private Solution solution;
+	@JsonIgnore
 	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	private Customer customer;
 	public Issue()
