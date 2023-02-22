@@ -1,5 +1,7 @@
 package com.customer.Entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -23,6 +25,7 @@ public class Operator {
 	private String city;
 //	@OneToOne
 //	private Call call;
+	@JsonIgnore
 	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	private Department department;
 	public Operator()
