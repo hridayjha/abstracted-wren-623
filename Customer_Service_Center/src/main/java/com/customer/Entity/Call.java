@@ -86,6 +86,14 @@ public class Call {
 	public void setOperator(Operator operator) {
 		this.operator = operator;
 	}
+	public Call(Integer callId, LocalDate callDate, Double duration, Customer customer) {
+		super();
+		this.callId = callId;
+		this.callDate = callDate;
+		this.duration = duration;
+		this.customer = customer;
+	}
+	
 	
 	
 	

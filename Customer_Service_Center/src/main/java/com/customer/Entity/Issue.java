@@ -46,14 +46,16 @@ public class Issue {
 	{
 		
 	}
-	public Issue(Integer issueId, String issueType, String description, Status status, Call call, Solution solution,
-			Customer customer) {
+	public Issue(Integer issueId,
+			@NotBlank(message = "Issue cannot be Blank") @NotEmpty(message = "Issue cannot be Empty") @NotNull(message = "Issue cannot be Null") String issueType,
+			@Size(min = 10, max = 200, message = "Description size should be between 10 and 200 characters") String description,
+			Status status, Call call, Solution solution, Customer customer) {
 		super();
 		this.issueId = issueId;
 		this.issueType = issueType;
 		this.description = description;
 		this.status = status;
-//		this.call = call;
+		this.call = call;
 		this.solution = solution;
 		this.customer = customer;
 	}
@@ -75,8 +77,7 @@ public class Issue {
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	
-public Status getStatus() {
+	public Status getStatus() {
 		return status;
 	}
 	public void setStatus(Status status) {
@@ -88,12 +89,6 @@ public Status getStatus() {
 	public void setCall(Call call) {
 		this.call = call;
 	}
-	//	public Call getCall() {
-//		return call;
-//	}
-//	public void setCall(Call call) {
-//		this.call = call;
-//	}
 	public Solution getSolution() {
 		return solution;
 	}
@@ -109,7 +104,8 @@ public Status getStatus() {
 	@Override
 	public String toString() {
 		return "Issue [issueId=" + issueId + ", issueType=" + issueType + ", description=" + description + ", status="
-				+ status +  ", solution=" + solution + "]";
+				+ status + ", call=" + call + ", solution=" + solution + "]";
 	}
+	
 	
 }

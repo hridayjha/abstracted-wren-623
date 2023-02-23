@@ -35,6 +35,7 @@ public class Customer {
 	private String email;
 	@Column(unique=true)
 	private String mobile;
+	private String password;
 	private String city;
 	@OneToMany(cascade =  CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "customer")
 	private List<Issue>issue=new ArrayList<>();
@@ -44,17 +45,31 @@ public class Customer {
 	{
 		
 	}
-	public Customer(Integer customerId, String firstName, String lastName, String email, String mobile, String city,
-			 List<Issue> issue) {
+	
+	public Customer(Integer customerId,
+			@NotBlank(message = "First Name cannot be Blank") @NotEmpty(message = "First Name cannot be Empty") @NotNull(message = "First Name cannot be Null") String firstName,
+			@NotBlank(message = "Last Name cannot be Blank") @NotEmpty(message = "Last Name cannot be Empty") @NotNull(message = "Last Name cannot be Null") String lastName,
+			@Email String email, String mobile, String password, String city, List<Issue> issue, List<Call> call) {
 		super();
 		this.customerId = customerId;
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.email = email;
 		this.mobile = mobile;
+		this.password = password;
 		this.city = city;
 		this.issue = issue;
+		this.call = call;
 	}
+	
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
 	public Integer getCustomerId() {
 		return customerId;
 	}
@@ -97,10 +112,17 @@ public class Customer {
 	public void setIssue(List<Issue> issue) {
 		this.issue = issue;
 	}
+	public List<Call> getCall() {
+		return call;
+	}
+	public void setCall(List<Call> call) {
+		this.call = call;
+	}
 	@Override
 	public String toString() {
 		return "Customer [customerId=" + customerId + ", firstName=" + firstName + ", lastName=" + lastName + ", email="
-				+ email + ", mobile=" + mobile + ", city=" + city + ", issue=" + issue + "]";
+				+ email + ", mobile=" + mobile + ", city=" + city + "]";
 	}
+	
 	
 }
