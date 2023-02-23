@@ -33,12 +33,15 @@ public class Solution {
 	{
 		
 	}
-	public Solution(Integer solutionId, String description, LocalDate date, Issue issue) {
+	public Solution(Integer solutionId,
+			@Size(min = 10, max = 200, message = "Description size should be between 10 and 200 characters") String description,
+			LocalDate date, Issue issue, Operator operator) {
 		super();
 		this.solutionId = solutionId;
 		this.description = description;
 		this.date = date;
 		this.issue = issue;
+		this.operator = operator;
 	}
 	public Integer getSolutionId() {
 		return solutionId;
@@ -64,10 +67,17 @@ public class Solution {
 	public void setIssue(Issue issue) {
 		this.issue = issue;
 	}
+	public Operator getOperator() {
+		return operator;
+	}
+	public void setOperator(Operator operator) {
+		this.operator = operator;
+	}
 	@Override
 	public String toString() {
-		return "Solution [solutionId=" + solutionId + ", description=" + description + ", issue=" + issue
-				+  "]";
+		return "Solution [solutionId=" + solutionId + ", description=" + description + ", date=" + date + ", issue="
+				+ issue + "]";
 	}
+	
 	
 }

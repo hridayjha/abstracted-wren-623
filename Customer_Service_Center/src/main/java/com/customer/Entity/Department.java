@@ -50,7 +50,7 @@ public class Department {
 	}
 	@Override
 	public String toString() {
-		return "Department [deptId=" + deptId + ", deptName=" + deptName + "]";
+		return "Department [deptId=" + deptId +  "]";
 	}
 	
 }

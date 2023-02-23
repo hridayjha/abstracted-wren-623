@@ -37,6 +37,7 @@ public class Operator {
 	@Email
 	@Column(unique = true)
 	private String email;
+	private String password;
 	@Column(unique = true)
 	private String mobile;
 	private String city;
@@ -53,18 +54,31 @@ public class Operator {
 	{
 		
 	}
-	public Operator(Integer operatorId, String firstName, String lastName, String email, String mobile, String city,
-			Call call, Department department) {
-		super();
-		this.operatorId = operatorId;
-		this.firstName = firstName;
-		this.lastName = lastName;
-		this.email = email;
-		this.mobile = mobile;
-		this.city = city;
-//		this.call = call;
-		this.department = department;
+	
+	public Operator(Integer operatorId,
+		@NotBlank(message = "First Name cannot be Blank") @NotEmpty(message = "First Name cannot be Empty") @NotNull(message = "First Name cannot be Null") String firstName,
+		@NotBlank(message = "Last Name cannot be Blank") @NotEmpty(message = "Last Name cannot be Empty") @NotNull(message = "Last Name cannot be Null") String lastName,
+		@Email String email, String password, String mobile, String city, List<Call> call, Department department) {
+	super();
+	this.operatorId = operatorId;
+	this.firstName = firstName;
+	this.lastName = lastName;
+	this.email = email;
+	this.password = password;
+	this.mobile = mobile;
+	this.city = city;
+	this.call = call;
+	this.department = department;
 	}
+	
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
 	public Integer getOperatorId() {
 		return operatorId;
 	}
@@ -101,12 +115,12 @@ public class Operator {
 	public void setCity(String city) {
 		this.city = city;
 	}
-//	public Call getCall() {
-//		return call;
-//	}
-//	public void setCall(Call call) {
-//		this.call = call;
-//	}
+	public List<Call> getCall() {
+		return call;
+	}
+	public void setCall(List<Call> call) {
+		this.call = call;
+	}
 	public Department getDepartment() {
 		return department;
 	}
@@ -116,8 +130,8 @@ public class Operator {
 	@Override
 	public String toString() {
 		return "Operator [operatorId=" + operatorId + ", firstName=" + firstName + ", lastName=" + lastName + ", email="
-				+ email + ", mobile=" + mobile + ", city=" + city + ", call=" + ", department=" + department
-				+ "]";
+				+ email + ", mobile=" + mobile + ", city=" + city + ", department=" + department + "]";
 	}
+	
 	
 }
