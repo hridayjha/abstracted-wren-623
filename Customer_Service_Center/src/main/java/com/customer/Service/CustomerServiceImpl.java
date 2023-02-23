@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.customer.Entity.Customer;
+import com.customer.Entity.Login;
 import com.customer.Exception.CustomerException;
 import com.customer.Repository.CustomerRepository;
 

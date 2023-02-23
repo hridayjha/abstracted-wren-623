@@ -1,6 +1,7 @@
 package com.customer.Service;
 
 import com.customer.Entity.Customer;
+import com.customer.Entity.Login;
 import com.customer.Exception.CustomerException;
 
 public interface CustomerService {
