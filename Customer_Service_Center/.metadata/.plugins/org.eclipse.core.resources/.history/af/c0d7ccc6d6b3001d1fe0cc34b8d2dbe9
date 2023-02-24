@@ -1,7 +1,6 @@
 package com.customer.Service;
 
 import java.time.LocalDateTime;
-
 import java.util.Optional;
 import java.util.UUID;
 
@@ -19,7 +18,6 @@ import com.customer.Repository.AdminRepository;
 import com.customer.Repository.CurrentUserSessionRepository;
 import com.customer.Repository.CustomerRepository;
 import com.customer.Repository.OperatorRepository;
-
 @Service
 public class LoginServiceImpl implements LoginService {
 
@@ -36,19 +34,16 @@ public class LoginServiceImpl implements LoginService {
 	AdminRepository adminDao;
 
 	@Override
-	public String loginUser(Login login) throws LoginException {
+	public String loginUser(Login credential) throws LoginException {
 
 		CurrentUserSession currentUserSession;
-		
-		
 
 		// checking for customer
-		if (login.getUser_Type().equals("CUSTOMER")) {
+		if (credential.getUser_Type().equals("CUSTOMER")) {
 
-			Customer existCustomer = customerDao.findByEmail(login.getEmail());
-
+			Customer existCustomer = customerDao.findByEmail(credential.getUserName());
 			if (existCustomer == null)
-				throw new LoginException("Please Enter a valid login");
+				throw new LoginException("Please Enter a valid CREDENTIALS");
 
 			Optional<CurrentUserSession> validCustomerSession = sessionDao.findById(existCustomer.getCustomerId());
 
@@ -58,12 +53,12 @@ public class LoginServiceImpl implements LoginService {
 
 			}
 
-			if (existCustomer.getPassword().equals(login.getPassword())) {
+			if (existCustomer.getPassword().equals(credential.getPassword())) {
 
 				String key = UUID.randomUUID().toString();
 
 				currentUserSession = new CurrentUserSession(existCustomer.getCustomerId(), key, LocalDateTime.now(),
-						login.getUser_Type());
+						credential.getUser_Type());
 
 				sessionDao.save(currentUserSession);
 
@@ -71,13 +66,13 @@ public class LoginServiceImpl implements LoginService {
 			} else
 				throw new LoginException("Passowrd incorrect");
 		}
-
+		
 		/// checking for Admin
-		if (login.getUser_Type().equals("ADMIN")) {
+		if (credential.getUser_Type().equals("ADMIN")) {
 
-			Admin existAdmin = adminDao.findByEmail(login.getEmail());
+			Admin existAdmin = adminDao.findByEmail(credential.getEmail());
 			if (existAdmin == null)
-				throw new LoginException("Please Enter a valid loginS");
+				throw new LoginException("Please Enter a valid CREDENTIALS");
 
 			Optional<CurrentUserSession> validAdminSessionOpt = sessionDao.findById(existAdmin.getAdminId());
 
@@ -87,14 +82,12 @@ public class LoginServiceImpl implements LoginService {
 
 			}
 
-			// Check Admin Password
-
-			if (existAdmin.getPassword().equals(login.getPassword())) {
+			if (existAdmin.getPassword().equals(credential.getPassword())) {
 
 				String key = UUID.randomUUID().toString();
 
 				currentUserSession = new CurrentUserSession(existAdmin.getAdminId(), key, LocalDateTime.now(),
-						login.getUser_Type());
+						credential.getUser_Type());
 
 				sessionDao.save(currentUserSession);
 
@@ -103,11 +96,11 @@ public class LoginServiceImpl implements LoginService {
 				throw new LoginException("Passowrd incorrect");
 		}
 
-		if (login.getUser_Type().equals("OPERATOR")) {
+		if (credential.getUser_Type().equals("OPERATOR")) {
 
-			Operator existingOperator = operatorDao.findByEmail(login.getEmail());
+			Operator existingOperator = operatorDao.findByEmail(credential.getEmail());
 			if (existingOperator == null)
-				throw new LoginException("Please Enter a valid loginS");
+				throw new LoginException("Please Enter a valid CREDENTIALS");
 
 			java.util.Optional<CurrentUserSession> validOperatorSessionOpt = sessionDao
 					.findById(existingOperator.getOperatorId());
@@ -118,12 +111,12 @@ public class LoginServiceImpl implements LoginService {
 
 			}
 
-			if (existingOperator.equals(login.getPassword())) {
+			if (existingOperator.equals(credential.getPassword())) {
 
 				String key = UUID.randomUUID().toString();
 
 				currentUserSession = new CurrentUserSession(existingOperator.getOperatorId(), key, LocalDateTime.now(),
-						login.getUser_Type());
+						credential.getUser_Type());
 
 				sessionDao.save(currentUserSession);
 
@@ -132,7 +125,7 @@ public class LoginServiceImpl implements LoginService {
 				throw new LoginException("Passowrd incorrect");
 		} else
 			throw new LoginException("Please Enter a valid User");
-		
+
 	}
 
 	@Override

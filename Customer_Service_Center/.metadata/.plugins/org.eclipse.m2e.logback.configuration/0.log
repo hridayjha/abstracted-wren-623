@@ -1,0 +1,62 @@
+2023-02-24 05:24:44,786 [Worker-6: Loading available Gradle versions] INFO  o.e.b.c.i.u.g.PublishedGradleVersions - Gradle version information cache is up-to-date. Trying to read.
+2023-02-24 05:27:21,902 [Worker-0: Loading available Gradle versions] INFO  o.e.b.c.i.u.g.PublishedGradleVersions - Gradle version information cache is up-to-date. Trying to read.
+2023-02-24 05:28:31,148 [Worker-6: Importing Maven projects] INFO  o.e.m.c.i.l.LifecycleMappingFactory - Using org.eclipse.m2e.jdt.JarLifecycleMapping lifecycle mapping for MavenProject: com.customer:Customer_Service_Center:0.0.1-SNAPSHOT @ C:\Users\Admin\Desktop\Online Customer Project\abstracted-wren-623\Customer_Service_Center\pom.xml.
+2023-02-24 05:28:33,323 [Worker-6: Importing Maven projects] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding source folder /Customer_Service_Center/src/main/java
+2023-02-24 05:28:33,324 [Worker-6: Importing Maven projects] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding resource folder /Customer_Service_Center/src/main/resources
+2023-02-24 05:28:33,325 [Worker-6: Importing Maven projects] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding resource folder /Customer_Service_Center/src/main/resources
+2023-02-24 05:28:33,326 [Worker-6: Importing Maven projects] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding source folder /Customer_Service_Center/src/test/java
+2023-02-24 05:28:34,162 [Worker-6: Importing Maven projects] INFO  o.e.m.c.i.p.ProjectConfigurationManager - Imported and configured 1 project(s) in 7 sec
+2023-02-24 05:28:39,884 [Worker-4: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource
+2023-02-24 05:28:39,919 [Worker-4: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource
+2023-02-24 05:28:39,955 [Worker-4: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory C:\Users\Admin\Desktop\Online Customer Project\abstracted-wren-623\Customer_Service_Center\src\test\resources
+2023-02-24 05:29:44,692 [Worker-1: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource
+2023-02-24 05:29:44,703 [Worker-1: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource
+2023-02-24 05:29:44,709 [Worker-1: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory C:\Users\Admin\Desktop\Online Customer Project\abstracted-wren-623\Customer_Service_Center\src\test\resources
+2023-02-24 05:29:58,562 [Worker-8: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource
+2023-02-24 05:29:58,591 [Worker-8: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource
+2023-02-24 05:29:58,596 [Worker-8: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory C:\Users\Admin\Desktop\Online Customer Project\abstracted-wren-623\Customer_Service_Center\src\test\resources
+2023-02-24 05:32:03,972 [Worker-4: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource
+2023-02-24 05:32:03,979 [Worker-4: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource
+2023-02-24 05:32:03,985 [Worker-4: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory C:\Users\Admin\Desktop\Online Customer Project\abstracted-wren-623\Customer_Service_Center\src\test\resources
+2023-02-24 05:32:59,409 [Worker-7: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource
+2023-02-24 05:32:59,418 [Worker-7: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource
+2023-02-24 05:32:59,423 [Worker-7: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory C:\Users\Admin\Desktop\Online Customer Project\abstracted-wren-623\Customer_Service_Center\src\test\resources
+2023-02-24 05:34:16,264 [Worker-7: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource
+2023-02-24 05:34:16,276 [Worker-7: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource
+2023-02-24 05:34:16,282 [Worker-7: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory C:\Users\Admin\Desktop\Online Customer Project\abstracted-wren-623\Customer_Service_Center\src\test\resources
+2023-02-24 05:34:28,291 [Worker-0: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource
+2023-02-24 05:34:28,300 [Worker-0: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource
+2023-02-24 05:34:28,305 [Worker-0: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory C:\Users\Admin\Desktop\Online Customer Project\abstracted-wren-623\Customer_Service_Center\src\test\resources
+2023-02-24 05:35:08,933 [Worker-3: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource
+2023-02-24 05:35:08,941 [Worker-3: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource
+2023-02-24 05:35:08,990 [Worker-3: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory C:\Users\Admin\Desktop\Online Customer Project\abstracted-wren-623\Customer_Service_Center\src\test\resources
+2023-02-24 05:38:11,714 [Worker-4: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource
+2023-02-24 05:38:11,728 [Worker-4: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource
+2023-02-24 05:38:11,734 [Worker-4: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory C:\Users\Admin\Desktop\Online Customer Project\abstracted-wren-623\Customer_Service_Center\src\test\resources
+2023-02-24 05:39:11,495 [Worker-7: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource
+2023-02-24 05:39:11,502 [Worker-7: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource
+2023-02-24 05:39:11,507 [Worker-7: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory C:\Users\Admin\Desktop\Online Customer Project\abstracted-wren-623\Customer_Service_Center\src\test\resources
+2023-02-24 05:39:49,768 [Worker-10: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource
+2023-02-24 05:39:49,800 [Worker-10: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource
+2023-02-24 05:39:49,805 [Worker-10: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory C:\Users\Admin\Desktop\Online Customer Project\abstracted-wren-623\Customer_Service_Center\src\test\resources
+2023-02-24 05:40:06,822 [Worker-4: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource
+2023-02-24 05:40:06,844 [Worker-4: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource
+2023-02-24 05:40:06,851 [Worker-4: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory C:\Users\Admin\Desktop\Online Customer Project\abstracted-wren-623\Customer_Service_Center\src\test\resources
+2023-02-24 05:43:29,005 [Worker-8: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource
+2023-02-24 05:43:29,015 [Worker-8: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource
+2023-02-24 05:43:29,021 [Worker-8: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory C:\Users\Admin\Desktop\Online Customer Project\abstracted-wren-623\Customer_Service_Center\src\test\resources
+2023-02-24 05:44:10,316 [Worker-15: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource
+2023-02-24 05:44:10,333 [Worker-15: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource
+2023-02-24 05:44:10,340 [Worker-15: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory C:\Users\Admin\Desktop\Online Customer Project\abstracted-wren-623\Customer_Service_Center\src\test\resources
+2023-02-24 05:49:14,642 [Worker-16: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource
+2023-02-24 05:49:14,652 [Worker-16: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource
+2023-02-24 05:49:14,658 [Worker-16: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory C:\Users\Admin\Desktop\Online Customer Project\abstracted-wren-623\Customer_Service_Center\src\test\resources
+2023-02-24 05:49:21,228 [Worker-17: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource
+2023-02-24 05:49:21,235 [Worker-17: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource
+2023-02-24 05:49:21,243 [Worker-17: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory C:\Users\Admin\Desktop\Online Customer Project\abstracted-wren-623\Customer_Service_Center\src\test\resources
+2023-02-24 05:49:45,844 [Worker-16: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource
+2023-02-24 05:49:45,851 [Worker-16: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource
+2023-02-24 05:49:45,856 [Worker-16: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory C:\Users\Admin\Desktop\Online Customer Project\abstracted-wren-623\Customer_Service_Center\src\test\resources
+2023-02-24 05:52:50,498 [Worker-22: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource
+2023-02-24 05:52:50,510 [Worker-22: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource
+2023-02-24 05:52:50,551 [Worker-22: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory C:\Users\Admin\Desktop\Online Customer Project\abstracted-wren-623\Customer_Service_Center\src\test\resources
