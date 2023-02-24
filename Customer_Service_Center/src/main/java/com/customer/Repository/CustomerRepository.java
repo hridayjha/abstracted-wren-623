@@ -9,7 +9,7 @@ import com.customer.Entity.Customer;
 public interface CustomerRepository extends JpaRepository<Customer, Integer> {
 	
 	 Customer findByEmail (String email);
-
+	 Customer findByCustomerId (Integer customerId);
 //    @Query("SELECT c FROM Customer c WHERE c.email = :email")
 //    Customer findByEmail( String email);
 }
