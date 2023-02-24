@@ -6,11 +6,16 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.customer.DTO.OperatorDTO;
+import com.customer.Entity.Call;
+import com.customer.Entity.CurrentUserSession;
 import com.customer.Entity.Department;
 import com.customer.Entity.Issue;
 import com.customer.Entity.Operator;
 import com.customer.Exception.DepartmentException;
+import com.customer.Exception.LoginException;
 import com.customer.Exception.OperatorException;
+import com.customer.Repository.CurrentUserSessionRepository;
 import com.customer.Repository.DepartmentDao;
 import com.customer.Repository.OperatorDao;
 
@@ -22,10 +27,19 @@ public class AdminServiceImpl implements AdminService{
 	@Autowired
 	private DepartmentDao dd;
 	
-	
+	@Autowired
+	private CurrentUserSessionRepository cSession;
 	
 	@Override
-	public Department addDepartment(Department d) {
+	public Department addDepartment(Department d,String key) throws LoginException{
+		
+//		checking if Admin already logged in or not
+		CurrentUserSession cAdmin=cSession.findByUuid(key);
+		if(cAdmin==null)
+		{
+//			if not then throw exception 
+			throw new LoginException("Admin needs to Login first");
+		}
 //		getting list of operators to map to department
 		List<Operator>list=d.getOperators();
 		for(Operator o:list)
@@ -39,7 +53,14 @@ public class AdminServiceImpl implements AdminService{
 	}
 
 	@Override
-	public Department updateDepartment(Department d) throws DepartmentException{
+	public Department updateDepartment(Department d,String key) throws DepartmentException, LoginException{
+//		checking if Admin already logged in or not
+		CurrentUserSession cAdmin=cSession.findByUuid(key);
+		if(cAdmin==null)
+		{
+//			if not then throw exception 
+			throw new LoginException("Admin needs to Login first");
+		}
 //		finding if the current dept exists or not
 		Optional<Department>opt=dd.findById(d.getDeptId());
 		if(opt.isPresent())
@@ -56,7 +77,14 @@ public class AdminServiceImpl implements AdminService{
 	}
 
 	@Override
-	public Department removeDepartment(Integer id) throws DepartmentException{
+	public Department removeDepartment(Integer id,String key) throws DepartmentException, LoginException{
+//		checking if Admin already logged in or not
+		CurrentUserSession cAdmin=cSession.findByUuid(key);
+		if(cAdmin==null)
+		{
+//			if not then throw exception 
+			throw new LoginException("Admin needs to Login first");
+		}
 //		finding if the current dept exists or not
 		Optional<Department>opt=dd.findById(id);
 		if(opt.isPresent())
@@ -64,6 +92,14 @@ public class AdminServiceImpl implements AdminService{
 //			if exists then deleting that object from database and returning to controller layer
 			Department dept=opt.get();
 			dd.delete(dept);
+//			getting list of operators to save in child entity table
+			List<Operator>list=dept.getOperators();
+			for(Operator o:list)
+			{
+				o.setDepartment(null);
+				od.save(o);
+			}
+
 			return dept;
 		}
 		else
@@ -74,7 +110,14 @@ public class AdminServiceImpl implements AdminService{
 	}
 
 	@Override
-	public Department getDepartmentById(Integer id) throws DepartmentException{
+	public Department getDepartmentById(Integer id,String key) throws DepartmentException, LoginException{
+//		checking if Admin already logged in or not
+		CurrentUserSession cAdmin=cSession.findByUuid(key);
+		if(cAdmin==null)
+		{
+//			if not then throw exception 
+			throw new LoginException("Admin needs to Login first");
+		}
 //		finding if the current dept exists or not
 		Optional<Department>opt=dd.findById(id);
 		if(opt.isPresent())
@@ -92,7 +135,14 @@ public class AdminServiceImpl implements AdminService{
 	}
 
 	@Override
-	public Operator addOperator(Operator o) {
+	public Operator addOperator(Operator o,String key) throws LoginException{
+//		checking if Admin already logged in or not
+		CurrentUserSession cAdmin=cSession.findByUuid(key);
+		if(cAdmin==null)
+		{
+//			if not then throw exception 
+			throw new LoginException("Admin needs to Login first");
+		}
 //		getting operator obj after calling save method on operator o
 		Operator op=od.save(o);
 //		returning operator obj
@@ -100,7 +150,14 @@ public class AdminServiceImpl implements AdminService{
 	}
 
 	@Override
-	public Operator assignDeptToOperator(Integer oid, Integer did) throws DepartmentException, OperatorException{
+	public OperatorDTO assignDeptToOperator(Integer oid, Integer did,String key) throws DepartmentException, OperatorException, LoginException{
+//		checking if Admin already logged in or not
+		CurrentUserSession cAdmin=cSession.findByUuid(key);
+		if(cAdmin==null)
+		{
+//			if not then throw exception 
+			throw new LoginException("Admin needs to Login first");
+		}
 //		finding operator by id
 		Optional<Operator>opt=od.findById(oid);
 		if(opt.isPresent())
@@ -115,8 +172,9 @@ public class AdminServiceImpl implements AdminService{
 				o.setDepartment(d);
 				d.getOperators().add(o);
 				dd.save(d);
-//				returning operator object
-				return o;
+				OperatorDTO od=new OperatorDTO(o.getOperatorId(),o.getDepartment().getDeptId());
+//				returning operatorDTO object
+				return od;
 			}
 			else
 			{
@@ -130,9 +188,16 @@ public class AdminServiceImpl implements AdminService{
 	}
 
 	@Override
-	public Operator updateOperator(Integer id, Operator o) throws OperatorException {
+	public Operator updateOperator(Operator o,String key) throws OperatorException , LoginException{
+//		checking if Admin already logged in or not
+		CurrentUserSession cAdmin=cSession.findByUuid(key);
+		if(cAdmin==null)
+		{
+//			if not then throw exception 
+			throw new LoginException("Admin needs to Login first");
+		}
 //		finding operator by given id
-		Optional<Operator>opt=od.findById(id);
+		Optional<Operator>opt=od.findById(o.getOperatorId());
 		if(opt.isPresent())
 		{
 //			if present then saving the operator object passed in the parameter
@@ -142,20 +207,31 @@ public class AdminServiceImpl implements AdminService{
 		}
 		else
 		{
-			throw new OperatorException("Operator with ID "+id+" does not exist");
+			throw new OperatorException("Operator with ID "+o.getOperatorId()+" does not exist");
 		}
 		
 	}
 
 	@Override
-	public Operator deleteOperator(Integer id) throws OperatorException{
+	public Operator deleteOperator(Integer id,String key) throws OperatorException, LoginException{
+//		checking if Admin already logged in or not
+		CurrentUserSession cAdmin=cSession.findByUuid(key);
+		if(cAdmin==null)
+		{
+//			if not then throw exception 
+			throw new LoginException("Admin needs to Login first");
+		}
 //		finding operator by given id
 		Optional<Operator>opt=od.findById(id);
 		if(opt.isPresent())
 		{
 //			getting operator object if present and deleting from database
 			Operator o=opt.get();
+//			need to remove the same operator from department list as well else it will not be removed
+			Department d=o.getDepartment();
+			d.getOperators().remove(o);
 			od.delete(o);
+			dd.save(d);
 //			returning operator object
 			return o;
 		}
@@ -166,13 +242,27 @@ public class AdminServiceImpl implements AdminService{
 	}
 
 	@Override
-	public List<Operator> getAllOperators() {
+	public List<Operator> getAllOperators(String key) throws LoginException{
+//		checking if Admin already logged in or not
+		CurrentUserSession cAdmin=cSession.findByUuid(key);
+		if(cAdmin==null)
+		{
+//			if not then throw exception 
+			throw new LoginException("Admin needs to Login first");
+		}
 		List<Operator>list=od.findAll();
 		return list;
 	}
 
 	@Override
-	public Operator getOperatorById(Integer id) throws OperatorException{
+	public Operator getOperatorById(Integer id,String key) throws OperatorException, LoginException{
+//		checking if Admin already logged in or not
+		CurrentUserSession cAdmin=cSession.findByUuid(key);
+		if(cAdmin==null)
+		{
+//			if not then throw exception 
+			throw new LoginException("Admin needs to Login first");
+		}
 //		finding operator by id
 		Optional<Operator>opt=od.findById(id);
 		if(opt.isPresent())
@@ -188,7 +278,14 @@ public class AdminServiceImpl implements AdminService{
 	}
 
 	@Override
-	public List<Operator> getAllOperatorWithDeptId(Integer id) throws DepartmentException{
+	public List<Operator> getAllOperatorWithDeptId(Integer id,String key) throws DepartmentException, LoginException{
+//		checking if Admin already logged in or not
+		CurrentUserSession cAdmin=cSession.findByUuid(key);
+		if(cAdmin==null)
+		{
+//			if not then throw exception 
+			throw new LoginException("Admin needs to Login first");
+		}
 		Optional<Department>opt=dd.findById(id);
 		if(opt.isPresent())
 		{
@@ -202,16 +299,18 @@ public class AdminServiceImpl implements AdminService{
 	}
 
 	@Override
-	public List<Issue> getAllOpenIssueWithOperatorById(Integer id) {
+	public List<Issue> getAllOpenIssueWithOperatorById(Integer id,String key)throws LoginException {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public List<Issue> getAllClosedIssueWithOperatorById(Integer id) {
+	public List<Issue> getAllClosedIssueWithOperatorById(Integer id,String key) throws LoginException{
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+	
 	
 	
 }

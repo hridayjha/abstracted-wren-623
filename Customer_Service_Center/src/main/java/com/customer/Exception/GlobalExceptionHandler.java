@@ -58,5 +58,25 @@ public class GlobalExceptionHandler {
 		
 		return new ResponseEntity<MyErrorDetails>(err, HttpStatus.BAD_REQUEST);
 	}
+  @ExceptionHandler(CustomerException.class)
+	public ResponseEntity<ErrorDetails> CustomerExceptionHandler(CustomerException e,WebRequest req)
+	{
+		ErrorDetails ed=new ErrorDetails(LocalDateTime.now(),e.getMessage(),req.getDescription(false));
+		return new ResponseEntity<>(ed,HttpStatus.BAD_REQUEST);
+	}
+	
+	@ExceptionHandler(DepartmentException.class)
+	public ResponseEntity<ErrorDetails> DepartmentExceptionHandler(DepartmentException e,WebRequest req)
+	{
+		ErrorDetails ed=new ErrorDetails(LocalDateTime.now(),e.getMessage(),req.getDescription(false));
+		return new ResponseEntity<>(ed,HttpStatus.BAD_REQUEST);
+	}
+	
+	@ExceptionHandler(OperatorException.class)
+	public ResponseEntity<ErrorDetails> OperatorExceptionHandler(OperatorException e,WebRequest req)
+	{
+		ErrorDetails ed=new ErrorDetails(LocalDateTime.now(),e.getMessage(),req.getDescription(false));
+		return new ResponseEntity<>(ed,HttpStatus.BAD_REQUEST);
+  }
 	
 }

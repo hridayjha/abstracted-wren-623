@@ -16,6 +16,7 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
+import jakarta.persistence.SequenceGenerator;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
@@ -24,7 +25,8 @@ import jakarta.validation.constraints.NotNull;
 @Entity
 public class Operator {
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "operatorGen")
+	@SequenceGenerator(name="operatorGen",sequenceName = "ogen",allocationSize = 1,initialValue = 100)
 	private Integer operatorId;
 	@NotBlank(message = "First Name cannot be Blank")
 	@NotEmpty(message = "First Name cannot be Empty")
@@ -44,7 +46,7 @@ public class Operator {
 	@OneToMany(fetch = FetchType.EAGER,cascade = CascadeType.ALL, mappedBy = "operator")
 	private List<Call> call=new ArrayList<>();
 	@JsonIgnore
-	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name="dept_id")
 	private Department department;
 //	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
