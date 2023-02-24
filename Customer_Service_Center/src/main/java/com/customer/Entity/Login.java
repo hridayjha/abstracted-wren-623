@@ -56,7 +56,7 @@ public class Login {
 		super();
 		this.email = email;
 		this.password = password;
-		User_Type = user_Type;
+		this.User_Type = user_Type;
 	}
 
 
