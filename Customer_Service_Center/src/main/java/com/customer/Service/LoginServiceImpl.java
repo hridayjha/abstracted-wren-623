@@ -40,7 +40,7 @@ public class LoginServiceImpl implements LoginService {
 
 		CurrentUserSession currentUserSession;
 		
-		
+		login.setUser_Type(login.getUser_Type().toUpperCase());
 
 		// checking for customer
 		if (login.getUser_Type().equals("CUSTOMER")) {
@@ -48,7 +48,7 @@ public class LoginServiceImpl implements LoginService {
 			Customer existCustomer = customerDao.findByEmail(login.getEmail());
 
 			if (existCustomer == null)
-				throw new LoginException("Please Enter a valid login");
+				throw new LoginException("Please Enter a valid Email login");
 
 			Optional<CurrentUserSession> validCustomerSession = sessionDao.findById(existCustomer.getCustomerId());
 
