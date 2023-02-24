@@ -10,38 +10,64 @@ import com.customer.Repository.CustomerRepository;
 
 @Service
 public class CustomerServiceImpl implements CustomerService {
-  
+	
 	@Autowired
 	private CustomerRepository customerRepository;
+	
+	@Autowired
+	CustomerRepository customerDao;
 
 	@Override
 	public Customer registerCustomer(Customer customer) {
 		
 		return customerRepository.save(customer);
 	}
-
-	@Override
-	public String loginCustomer(Login login) throws CustomerException {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
+	
 	@Override
 	public String changePassword(Login login) throws CustomerException {
-		// TODO Auto-generated method stub
-		return null;
+		
+		String msg=null;
+		
+		if (login.getUser_Type().equals("CUSTOMER")) {
+
+			Customer existCustomer = customerDao.findByEmail(login.getEmail());
+
+			if (existCustomer == null)
+				throw new CustomerException("Please Enter a valid login");
+			else
+				existCustomer.setPassword(login.getPassword());
+				customerDao.save(existCustomer);
+				msg="Password Updated";
+		}
+		return msg;
 	}
 
 	@Override
 	public String forgetPassword(Integer id) throws CustomerException {
-		// TODO Auto-generated method stub
-		return null;
+		String msg=null;
+		Customer existCustomer = customerDao.findByCustomerId(id);
+
+		if (existCustomer == null)
+			throw new CustomerException("Please Enter a valid CustomerId");
+		else {
+			existCustomer.setPassword("123@123");
+			String p=existCustomer.getPassword();
+			customerDao.save(existCustomer);
+			msg="Your temporary  Password is 123@123";
+		}
+		return msg;
 	}
 
 	@Override
 	public Customer emailPassword(Integer id) throws CustomerException {
-		// TODO Auto-generated method stub
-		return null;
+		
+		Customer existCustomer = customerDao.findByCustomerId(id);
+
+		if (existCustomer == null)
+			throw new CustomerException("Please Enter a valid CustomerId");
+		else {
+			return existCustomer;
+		}
 	}
 	
 	
