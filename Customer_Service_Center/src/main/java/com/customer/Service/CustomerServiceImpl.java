@@ -1,11 +1,15 @@
 package com.customer.Service;
 
+import javax.security.auth.login.LoginException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.customer.Entity.CurrentUserSession;
 import com.customer.Entity.Customer;
 import com.customer.Entity.Login;
 import com.customer.Exception.CustomerException;
+import com.customer.Repository.CurrentUserSessionRepository;
 import com.customer.Repository.CustomerRepository;
 
 @Service
@@ -16,6 +20,9 @@ public class CustomerServiceImpl implements CustomerService {
 	
 	@Autowired
 	CustomerRepository customerDao;
+	
+	@Autowired
+	CurrentUserSessionRepository sessionDao;
 
 	@Override
 	public Customer registerCustomer(Customer customer) {
@@ -59,14 +66,20 @@ public class CustomerServiceImpl implements CustomerService {
 	}
 
 	@Override
-	public Customer emailPassword(Integer id) throws CustomerException {
+	public Customer emailPassword(Integer id,String key) throws CustomerException {
 		
 		Customer existCustomer = customerDao.findByCustomerId(id);
 
 		if (existCustomer == null)
 			throw new CustomerException("Please Enter a valid CustomerId");
 		else {
-			return existCustomer;
+				CurrentUserSession checkUser = sessionDao.findByUuid(key);
+
+				if (checkUser == null) {
+					throw new CustomerException("You have to Login first .");
+				}
+				
+				return existCustomer;
 		}
 	}
 	

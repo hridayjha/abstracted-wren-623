@@ -3,6 +3,7 @@ package com.customer.Controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -36,7 +37,7 @@ public class CustomerController {
     	return new ResponseEntity<String>(massage, HttpStatus.OK);
     	
     }
-    @PostMapping("/forgetPassword/{id}")
+    @GetMapping("/forgetPassword/{id}")
     public ResponseEntity<String> forgetPasswordHandler (@PathVariable("id")Integer id)  throws CustomerException{
     	
     	String massage=customerService.forgetPassword(id);
@@ -44,10 +45,10 @@ public class CustomerController {
     	return new ResponseEntity<String>(massage, HttpStatus.OK);
     	
     }
-    @PostMapping("/emailPassword/{id}")
-    public ResponseEntity<Customer> emailPasswordHandler (@PathVariable("id")Integer id)  throws CustomerException{
+    @GetMapping("/emailPassword/{id}/{key}")
+    public ResponseEntity<Customer> emailPasswordHandler (@PathVariable("id")Integer id,@PathVariable("key")String key)  throws CustomerException{
     	
-    	Customer massage=customerService.emailPassword(id);
+    	Customer massage=customerService.emailPassword(id, key);
     	
     	return new ResponseEntity<Customer>(massage, HttpStatus.OK);
     	
