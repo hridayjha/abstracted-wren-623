@@ -10,5 +10,5 @@ public interface CustomerService {
 	
 	public String changePassword(Login login) throws CustomerException;
 	public String forgetPassword(Integer id) throws CustomerException;
-	public Customer emailPassword(Integer id) throws CustomerException;
+	public Customer emailPassword(Integer id,String key) throws CustomerException;
 }
