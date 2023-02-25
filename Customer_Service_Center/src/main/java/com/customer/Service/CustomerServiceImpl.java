@@ -1,5 +1,7 @@
 package com.customer.Service;
 
+import java.util.Optional;
+
 import javax.security.auth.login.LoginException;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,16 +9,24 @@ import org.springframework.stereotype.Service;
 
 import com.customer.Entity.CurrentUserSession;
 import com.customer.Entity.Customer;
+import com.customer.Entity.Issue;
 import com.customer.Entity.Login;
 import com.customer.Exception.CustomerException;
 import com.customer.Repository.CurrentUserSessionRepository;
 import com.customer.Repository.CustomerRepository;
+import com.customer.Repository.IssueRepository;
 
 @Service
 public class CustomerServiceImpl implements CustomerService {
 	
 	@Autowired
 	private CustomerRepository customerRepository;
+	
+	@Autowired
+	private CurrentUserSessionRepository usersession;
+	
+	@Autowired
+	private IssueRepository issueRepo;
 	
 	@Autowired
 	CustomerRepository customerDao;
@@ -80,6 +90,29 @@ public class CustomerServiceImpl implements CustomerService {
 				}
 				
 				return existCustomer;
+		}
+	}
+
+	@Override
+	public Issue viewissue(Integer id, String key) throws CustomerException {
+		// TODO Auto-generated method stub
+		CurrentUserSession cSession = usersession.findByUuid(key);
+		
+		if(cSession==null) {
+			throw new CustomerException("Customers needs to login");
+		}
+		Optional<Issue> opt = issueRepo.findById(id);
+		if(opt.isPresent()) {
+			Issue i = opt.get();
+			if(i.getCustomer().getCustomerId()==cSession.getId()) {
+				return i;
+			}
+			else {
+				throw new CustomerException("Issue does not belongs to you");
+			}
+		}
+		else {
+			throw new CustomerException("Issue Does not Exists");
 		}
 	}
 	
