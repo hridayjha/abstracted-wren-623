@@ -40,6 +40,10 @@ public class AdminServiceImpl implements AdminService{
 //			if not then throw exception 
 			throw new LoginException("Admin needs to Login first");
 		}
+		if(!cAdmin.getUser_Type().equals("ADMIN"))
+		{
+			throw new LoginException("Invalid UUID for Admin Session");
+		}
 //		getting list of operators to map to department
 		List<Operator>list=d.getOperators();
 		for(Operator o:list)
@@ -60,6 +64,10 @@ public class AdminServiceImpl implements AdminService{
 		{
 //			if not then throw exception 
 			throw new LoginException("Admin needs to Login first");
+		}
+		if(!cAdmin.getUser_Type().equals("ADMIN"))
+		{
+			throw new LoginException("Invalid UUID for Admin Session");
 		}
 //		finding if the current dept exists or not
 		Optional<Department>opt=dd.findById(d.getDeptId());
@@ -84,6 +92,10 @@ public class AdminServiceImpl implements AdminService{
 		{
 //			if not then throw exception 
 			throw new LoginException("Admin needs to Login first");
+		}
+		if(!cAdmin.getUser_Type().equals("ADMIN"))
+		{
+			throw new LoginException("Invalid UUID for Admin Session");
 		}
 //		finding if the current dept exists or not
 		Optional<Department>opt=dd.findById(id);
@@ -118,6 +130,10 @@ public class AdminServiceImpl implements AdminService{
 //			if not then throw exception 
 			throw new LoginException("Admin needs to Login first");
 		}
+		if(!cAdmin.getUser_Type().equals("ADMIN"))
+		{
+			throw new LoginException("Invalid UUID for Admin Session");
+		}
 //		finding if the current dept exists or not
 		Optional<Department>opt=dd.findById(id);
 		if(opt.isPresent())
@@ -143,6 +159,10 @@ public class AdminServiceImpl implements AdminService{
 //			if not then throw exception 
 			throw new LoginException("Admin needs to Login first");
 		}
+		if(!cAdmin.getUser_Type().equals("ADMIN"))
+		{
+			throw new LoginException("Invalid UUID for Admin Session");
+		}
 //		getting operator obj after calling save method on operator o
 		Operator op=od.save(o);
 //		returning operator obj
@@ -157,6 +177,10 @@ public class AdminServiceImpl implements AdminService{
 		{
 //			if not then throw exception 
 			throw new LoginException("Admin needs to Login first");
+		}
+		if(!cAdmin.getUser_Type().equals("ADMIN"))
+		{
+			throw new LoginException("Invalid UUID for Admin Session");
 		}
 //		finding operator by id
 		Optional<Operator>opt=od.findById(oid);
@@ -196,6 +220,10 @@ public class AdminServiceImpl implements AdminService{
 //			if not then throw exception 
 			throw new LoginException("Admin needs to Login first");
 		}
+		if(!cAdmin.getUser_Type().equals("ADMIN"))
+		{
+			throw new LoginException("Invalid UUID for Admin Session");
+		}
 //		finding operator by given id
 		Optional<Operator>opt=od.findById(o.getOperatorId());
 		if(opt.isPresent())
@@ -220,6 +248,10 @@ public class AdminServiceImpl implements AdminService{
 		{
 //			if not then throw exception 
 			throw new LoginException("Admin needs to Login first");
+		}
+		if(!cAdmin.getUser_Type().equals("ADMIN"))
+		{
+			throw new LoginException("Invalid UUID for Admin Session");
 		}
 //		finding operator by given id
 		Optional<Operator>opt=od.findById(id);
@@ -250,6 +282,10 @@ public class AdminServiceImpl implements AdminService{
 //			if not then throw exception 
 			throw new LoginException("Admin needs to Login first");
 		}
+		if(!cAdmin.getUser_Type().equals("ADMIN"))
+		{
+			throw new LoginException("Invalid UUID for Admin Session");
+		}
 		List<Operator>list=od.findAll();
 		return list;
 	}
@@ -262,6 +298,10 @@ public class AdminServiceImpl implements AdminService{
 		{
 //			if not then throw exception 
 			throw new LoginException("Admin needs to Login first");
+		}
+		if(!cAdmin.getUser_Type().equals("ADMIN"))
+		{
+			throw new LoginException("Invalid UUID for Admin Session");
 		}
 //		finding operator by id
 		Optional<Operator>opt=od.findById(id);
@@ -286,6 +326,10 @@ public class AdminServiceImpl implements AdminService{
 //			if not then throw exception 
 			throw new LoginException("Admin needs to Login first");
 		}
+		if(!cAdmin.getUser_Type().equals("ADMIN"))
+		{
+			throw new LoginException("Invalid UUID for Admin Session");
+		}
 		Optional<Department>opt=dd.findById(id);
 		if(opt.isPresent())
 		{
@@ -298,17 +342,6 @@ public class AdminServiceImpl implements AdminService{
 		}
 	}
 
-	@Override
-	public List<Issue> getAllOpenIssueWithOperatorById(Integer id,String key)throws LoginException {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public List<Issue> getAllClosedIssueWithOperatorById(Integer id,String key) throws LoginException{
-		// TODO Auto-generated method stub
-		return null;
-	}
 
 	
 	
