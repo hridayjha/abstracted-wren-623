@@ -1,5 +1,7 @@
 package com.customer.Controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -60,6 +62,22 @@ public class CustomerController {
     	Issue issue = customerService.viewissue(id, key);
     	
     	return new ResponseEntity<>(issue, HttpStatus.ACCEPTED);
+    	
+    }
+    
+    @GetMapping("/Allissue/{id}/{key}")
+    public ResponseEntity<List<Issue>> getAllIssues(@PathVariable("id") Integer Id, @PathVariable("key") String key) throws CustomerException{
+    	List<Issue> issue1 = customerService.getAllIssue(Id,key);
+    	
+    	return new ResponseEntity<>(issue1, HttpStatus.ACCEPTED);
+    	
+    }
+    
+    @PutMapping("/Openissue/{id}/{cid}/{key}")
+    public ResponseEntity<String> OpenIssue(@PathVariable("id") Integer Id,@PathVariable("cid") Integer Cid, @PathVariable("key") String key) throws CustomerException{
+    	String s = customerService.reopenIssue(Id, Cid, key);
+    	
+    	return new ResponseEntity<>(s, HttpStatus.ACCEPTED);
     	
     }
 
