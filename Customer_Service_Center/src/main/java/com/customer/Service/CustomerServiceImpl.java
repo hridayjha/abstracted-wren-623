@@ -1,5 +1,7 @@
 package com.customer.Service;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 import javax.security.auth.login.LoginException;
@@ -11,6 +13,7 @@ import com.customer.Entity.CurrentUserSession;
 import com.customer.Entity.Customer;
 import com.customer.Entity.Issue;
 import com.customer.Entity.Login;
+import com.customer.Entity.Status;
 import com.customer.Exception.CustomerException;
 import com.customer.Repository.CurrentUserSessionRepository;
 import com.customer.Repository.CustomerRepository;
@@ -113,6 +116,68 @@ public class CustomerServiceImpl implements CustomerService {
 		}
 		else {
 			throw new CustomerException("Issue Does not Exists");
+		}
+	}
+	@Override
+	public List<Issue> getAllIssue(Integer Id, String key) throws CustomerException {
+		// TODO Auto-generated method stub
+		CurrentUserSession cSession = usersession.findByUuid(key);
+		List<Issue> ls = new ArrayList<>();
+		if(cSession==null) {
+			throw new CustomerException("Customers needs to login");
+		}
+		if(Id!=cSession.getId()) {
+			throw new CustomerException("Please Provide Valid Key for corresponding id");
+		}
+		else {
+			Optional<Customer> opt = customerRepository.findById(Id);
+			if(opt.isPresent()) {
+				Customer c = opt.get();
+				return c.getIssue();
+			}
+			else {
+				throw new CustomerException("Invalid Customer");
+			}
+			
+		}
+		
+		
+	}
+
+	@Override
+	public String reopenIssue(Integer Id, Integer cid, String key) throws CustomerException {
+		// TODO Auto-generated method stub
+		CurrentUserSession cSession = usersession.findByUuid(key);
+		if(cSession==null) {
+			throw new CustomerException("Customers needs to login");
+		}
+		if(cid!=cSession.getId()) {
+			throw new CustomerException("Please Provide Valid Key for corresponding id");
+		}
+		else {
+			Optional<Customer> opt = customerRepository.findById(cid);
+			if(opt.isPresent()) {
+				Customer c = opt.get();
+				Issue i = null;
+				List<Issue> ls = c.getIssue();
+				for(Issue I:ls) {
+					if(I.getIssueId()==Id) {
+						i = I;
+					}
+				}
+				if(i==null) {
+					throw new CustomerException("Invalid Issue");
+				}
+				else {
+					i.setStatus(Status.Open);
+					customerRepository.save(c);
+					return "Issue Opened Successfully";
+				}
+			}
+			else {
+				throw new CustomerException("Invalid Customer");
+			}
+			
 		}
 	}
 	

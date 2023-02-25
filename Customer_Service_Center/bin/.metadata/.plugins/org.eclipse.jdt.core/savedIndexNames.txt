@@ -1,3 +1,0 @@
-INDEX VERSION 1.131+C:\Users\Admin\Documents\GitHub\abstracted-wren-623\Customer_Service_Center\.metadata\.plugins\org.eclipse.jdt.core
-480928419.index
-1865797976.index
