@@ -83,7 +83,7 @@ public class LoginServiceImpl implements LoginService {
 
 			if (validAdminSessionOpt.isPresent()) {
 
-				throw new LoginException("User already Logged exist with this Email");
+				throw new LoginException("Admin already Logged in");
 
 			}
 

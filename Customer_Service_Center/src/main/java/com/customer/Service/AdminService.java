@@ -22,6 +22,4 @@ public interface AdminService {
 	public List<Operator> getAllOperators(String key)throws LoginException;
 	public Operator getOperatorById(Integer id,String key) throws OperatorException,LoginException;
 	public List<Operator> getAllOperatorWithDeptId(Integer id,String key) throws DepartmentException,LoginException;
-	public List<Issue> getAllOpenIssueWithOperatorById(Integer id,String key)throws LoginException;
-	public List<Issue> getAllClosedIssueWithOperatorById(Integer id,String key);
 }
