@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.customer.Entity.Customer;
+import com.customer.Entity.Issue;
 import com.customer.Entity.Login;
 import com.customer.Exception.CustomerException;
 import com.customer.Service.CustomerService;
@@ -51,6 +52,14 @@ public class CustomerController {
     	Customer massage=customerService.emailPassword(id, key);
     	
     	return new ResponseEntity<Customer>(massage, HttpStatus.OK);
+    	
+    }
+    
+    @GetMapping("/issue/{id}/{key}")
+    public ResponseEntity<Issue> getIssueById(@PathVariable("id") Integer id,@PathVariable("key") String key) throws CustomerException{
+    	Issue issue = customerService.viewissue(id, key);
+    	
+    	return new ResponseEntity<>(issue, HttpStatus.ACCEPTED);
     	
     }
 
