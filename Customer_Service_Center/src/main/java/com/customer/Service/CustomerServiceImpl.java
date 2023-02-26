@@ -39,7 +39,10 @@ public class CustomerServiceImpl implements CustomerService {
 
 	@Override
 	public Customer registerCustomer(Customer customer) {
-		
+		List<Issue> ls = customer.getIssue();
+		for(Issue i:ls) {
+			i.setCustomer(customer);
+		}
 		return customerRepository.save(customer);
 	}
 	
