@@ -18,6 +18,8 @@ import com.customer.Entity.Login;
 import com.customer.Exception.CustomerException;
 import com.customer.Service.CustomerService;
 
+import jakarta.validation.Valid;
+
 
 
 @RestController
@@ -26,7 +28,7 @@ public class CustomerController {
 	private CustomerService customerService;
     
     @PostMapping("/register")
-    public ResponseEntity<Customer> saveCustomerHandler(@RequestBody Customer customer){
+    public ResponseEntity<Customer> saveCustomerHandler(@Valid@RequestBody Customer customer){
     	Customer customer1 = customerService.registerCustomer(customer);
     	
     	return new ResponseEntity<>(customer1, HttpStatus.ACCEPTED);

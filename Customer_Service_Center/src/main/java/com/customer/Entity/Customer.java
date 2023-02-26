@@ -35,6 +35,9 @@ public class Customer {
 	private String email;
 	@Column(unique = true)
 	private String mobile;
+	@NotBlank(message = "Password cannot be Blank")
+	@NotEmpty(message = "Password cannot be Empty")
+	@NotNull(message = "Password cannot be Null")
 	private String password;
 	private String city;
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "customer")
