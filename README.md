@@ -24,6 +24,7 @@ Customers can raise  issues that they are facing and the Operators can provide S
 - [@Saurabh Kumar](https://github.com/rajsaurabh78)
 - [@Gitesh Sutar](https://github.com/gitesh8)
 - [@Ritish Gautam](https://github.com/RitishFG)
+- [@Hriday Narayan Jha](https://github.com/hridayjha)
 
 ### Functionalities
 
